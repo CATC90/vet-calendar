@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html,
 body {
   padding: 0;
@@ -15,12 +19,30 @@ a {
   box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
+.app {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: space-between;
+  gap: 1rem;
+  margin: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  width: min(900px, 90%);
+  min-width: 345px;
+}
+
+.calendar-container {
+  width: max(400px, 50%);
+  margin: auto;
+  flex: 1.2;
+}
+
+.vet-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

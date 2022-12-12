@@ -1,0 +1,46 @@
+"use strict";
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+(() => {
+var exports = {};
+exports.id = "pages/api/available-hours";
+exports.ids = ["pages/api/available-hours"];
+exports.modules = {
+
+/***/ "luxon":
+/*!************************!*\
+  !*** external "luxon" ***!
+  \************************/
+/***/ ((module) => {
+
+module.exports = import("luxon");;
+
+/***/ }),
+
+/***/ "(api)/./src/pages/api/available-hours.ts":
+/*!******************************************!*\
+  !*** ./src/pages/api/available-hours.ts ***!
+  \******************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {\n__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ handler)\n/* harmony export */ });\n/* harmony import */ var luxon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! luxon */ \"luxon\");\nvar __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([luxon__WEBPACK_IMPORTED_MODULE_0__]);\nluxon__WEBPACK_IMPORTED_MODULE_0__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];\n// Next.js API route support: https://nextjs.org/docs/api-routes/introduction\n\nconst LIMITS_WORKING_HOUR = {\n    min: 9,\n    max: 20\n};\nconst getAllHours = (hour, interval = 30)=>{\n    const minHour = hour < LIMITS_WORKING_HOUR.min ? LIMITS_WORKING_HOUR.min : hour;\n    return Array.from(Array((LIMITS_WORKING_HOUR.max - minHour) * 2).keys()).map((number)=>{\n        if (number % 2 === 0) {\n            return {\n                hour: minHour + number / 2,\n                minutes: 0\n            };\n        }\n        return {\n            hour: minHour + Math.floor(number / 2),\n            minutes: interval\n        };\n    });\n};\nconst isOnWorkingHour = (date)=>{\n    return date.hour < LIMITS_WORKING_HOUR.max;\n};\nconst validateDate = (currentDate, selectedDate)=>{\n    return currentDate.hasSame(selectedDate, \"day\") && isOnWorkingHour(currentDate);\n};\nfunction handler(req, res) {\n    let availableHoursByVet = [];\n    /** TODO: getting vets from bd */ const vets = [\n        {\n            name: \"Isabel de Rodt\"\n        }\n    ];\n    const currentDate = luxon__WEBPACK_IMPORTED_MODULE_0__.DateTime.now().setLocale(\"es-CL\");\n    const selectedDate = luxon__WEBPACK_IMPORTED_MODULE_0__.DateTime.fromISO(req.query.currentDate).setLocale(\"es-CL\");\n    if (validateDate(currentDate, selectedDate) || !selectedDate.hasSame(currentDate, \"day\")) {\n        const allHours = getAllHours(currentDate.hasSame(selectedDate, \"day\") ? selectedDate.hour + 1 : 9);\n        const availableHours = allHours.map((hour)=>{\n            return selectedDate.set(hour).toISO();\n        });\n        availableHoursByVet = vets.map((vet)=>{\n            return {\n                vet,\n                availableHours\n            };\n        });\n    }\n    res.status(200).json({\n        availableHoursByVet\n    });\n}\n\n__webpack_async_result__();\n} catch(e) { __webpack_async_result__(e); } });//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKGFwaSkvLi9zcmMvcGFnZXMvYXBpL2F2YWlsYWJsZS1ob3Vycy50cy5qcyIsIm1hcHBpbmdzIjoiOzs7Ozs7OztBQUFBLDZFQUE2RTtBQUU1QztBQUdqQyxNQUFNQyxzQkFBc0I7SUFBRUMsS0FBSztJQUFHQyxLQUFLO0FBQUc7QUFFOUMsTUFBTUMsY0FBYyxDQUFDQyxNQUFjQyxXQUFtQixFQUFFLEdBQUs7SUFDM0QsTUFBTUMsVUFBVUYsT0FBT0osb0JBQW9CQyxHQUFHLEdBQUdELG9CQUFvQkMsR0FBRyxHQUFHRyxJQUFJO0lBRS9FLE9BQU9HLE1BQU1DLElBQUksQ0FBQ0QsTUFBTSxDQUFDUCxvQkFBb0JFLEdBQUcsR0FBR0ksT0FBTSxJQUFLLEdBQUdHLElBQUksSUFBSUMsR0FBRyxDQUFDLENBQUNDLFNBQVc7UUFDdkYsSUFBSUEsU0FBUyxNQUFNLEdBQUc7WUFDcEIsT0FBTztnQkFBRVAsTUFBTUUsVUFBVUssU0FBTztnQkFBR0MsU0FBUztZQUFFO1FBQ2hELENBQUM7UUFDRCxPQUFPO1lBQUVSLE1BQU1FLFVBQVVPLEtBQUtDLEtBQUssQ0FBQ0gsU0FBTztZQUFJQyxTQUFTUDtRQUFTO0lBQ25FO0FBRUY7QUFFQSxNQUFNVSxrQkFBa0IsQ0FBQ0MsT0FBbUI7SUFDMUMsT0FBT0EsS0FBS1osSUFBSSxHQUFHSixvQkFBb0JFLEdBQUc7QUFDNUM7QUFFQSxNQUFNZSxlQUFlLENBQUNDLGFBQXVCQyxlQUEyQjtJQUN0RSxPQUFPRCxZQUFZRSxPQUFPLENBQUNELGNBQWMsVUFBVUosZ0JBQWdCRztBQUNyRTtBQUVlLFNBQVNHLFFBQ3RCQyxHQUFtQixFQUNuQkMsR0FBMkMsRUFDM0M7SUFDQSxJQUFJQyxzQkFBMkIsRUFBRTtJQUNqQywrQkFBK0IsR0FDL0IsTUFBTUMsT0FBTztRQUFDO1lBQUVDLE1BQU07UUFBaUI7S0FBRTtJQUd6QyxNQUFNUixjQUFlbkIsK0NBQVksR0FBRzZCLFNBQVMsQ0FBQztJQUM5QyxNQUFNVCxlQUFnQnBCLG1EQUFnQixDQUFDdUIsSUFBSVEsS0FBSyxDQUFDWixXQUFXLEVBQVlVLFNBQVMsQ0FBQztJQUVsRixJQUFHWCxhQUFhQyxhQUFhQyxpQkFBaUIsQ0FBQ0EsYUFBYUMsT0FBTyxDQUFDRixhQUFhLFFBQVE7UUFDdkYsTUFBTWEsV0FBVzVCLFlBQVllLFlBQVlFLE9BQU8sQ0FBQ0QsY0FBYyxTQUFTQSxhQUFhZixJQUFJLEdBQUcsSUFBSSxDQUFDO1FBRWpHLE1BQU00QixpQkFBaUJELFNBQVNyQixHQUFHLENBQUNOLENBQUFBLE9BQVE7WUFDMUMsT0FBT2UsYUFBYWMsR0FBRyxDQUFDN0IsTUFBTThCLEtBQUs7UUFDckM7UUFFQVYsc0JBQXNCQyxLQUFLZixHQUFHLENBQUN5QixDQUFBQSxNQUFPO1lBQ3BDLE9BQU87Z0JBQUVBO2dCQUFLSDtZQUFlO1FBQy9CO0lBQ0YsQ0FBQztJQUlEVCxJQUFJYSxNQUFNLENBQUMsS0FBS0MsSUFBSSxDQUFDO1FBQUViO0lBQW9CO0FBQzdDLENBQUMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly92ZXQtY2FsZW5kYXIvLi9zcmMvcGFnZXMvYXBpL2F2YWlsYWJsZS1ob3Vycy50cz85OGM1Il0sInNvdXJjZXNDb250ZW50IjpbIi8vIE5leHQuanMgQVBJIHJvdXRlIHN1cHBvcnQ6IGh0dHBzOi8vbmV4dGpzLm9yZy9kb2NzL2FwaS1yb3V0ZXMvaW50cm9kdWN0aW9uXG5pbXBvcnQgdHlwZSB7IE5leHRBcGlSZXF1ZXN0LCBOZXh0QXBpUmVzcG9uc2UgfSBmcm9tICduZXh0J1xuaW1wb3J0IHsgRGF0ZVRpbWUgfSBmcm9tIFwibHV4b25cIjtcbmltcG9ydCB7IEF2YWxpYWJsZUhvdXJSZXNwb25zZSB9IGZyb20gJy4uLy4uL2ludGVyZmFjZXMnO1xuXG5jb25zdCBMSU1JVFNfV09SS0lOR19IT1VSID0geyBtaW46IDksIG1heDogMjAgfTtcblxuY29uc3QgZ2V0QWxsSG91cnMgPSAoaG91cjogbnVtYmVyLCBpbnRlcnZhbDogbnVtYmVyID0gMzApID0+IHtcbiAgY29uc3QgbWluSG91ciA9IGhvdXIgPCBMSU1JVFNfV09SS0lOR19IT1VSLm1pbiA/IExJTUlUU19XT1JLSU5HX0hPVVIubWluIDogaG91cjtcblxuICByZXR1cm4gQXJyYXkuZnJvbShBcnJheSgoTElNSVRTX1dPUktJTkdfSE9VUi5tYXggLSBtaW5Ib3VyKSAqIDIpLmtleXMoKSkubWFwKChudW1iZXIpID0+IHtcbiAgICBpZiAobnVtYmVyICUgMiA9PT0gMCkge1xuICAgICAgcmV0dXJuIHsgaG91cjogbWluSG91ciArIG51bWJlci8yLCBtaW51dGVzOiAwIH1cbiAgICB9XG4gICAgcmV0dXJuIHsgaG91cjogbWluSG91ciArIE1hdGguZmxvb3IobnVtYmVyLzIpLCBtaW51dGVzOiBpbnRlcnZhbCB9O1xuICB9KVxuXG59XG5cbmNvbnN0IGlzT25Xb3JraW5nSG91ciA9IChkYXRlOiBEYXRlVGltZSkgPT4ge1xuICByZXR1cm4gZGF0ZS5ob3VyIDwgTElNSVRTX1dPUktJTkdfSE9VUi5tYXg7XG59XG5cbmNvbnN0IHZhbGlkYXRlRGF0ZSA9IChjdXJyZW50RGF0ZTogRGF0ZVRpbWUsIHNlbGVjdGVkRGF0ZTogRGF0ZVRpbWUpID0+IHtcbiAgcmV0dXJuIGN1cnJlbnREYXRlLmhhc1NhbWUoc2VsZWN0ZWREYXRlLCAnZGF5JykgJiYgaXNPbldvcmtpbmdIb3VyKGN1cnJlbnREYXRlKVxufVxuXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbiBoYW5kbGVyKFxuICByZXE6IE5leHRBcGlSZXF1ZXN0LFxuICByZXM6IE5leHRBcGlSZXNwb25zZTxBdmFsaWFibGVIb3VyUmVzcG9uc2U+XG4pIHtcbiAgbGV0IGF2YWlsYWJsZUhvdXJzQnlWZXQ6IGFueSA9IFtdO1xuICAvKiogVE9ETzogZ2V0dGluZyB2ZXRzIGZyb20gYmQgKi9cbiAgY29uc3QgdmV0cyA9IFt7IG5hbWU6ICdJc2FiZWwgZGUgUm9kdCcgfV07XG4gIFxuXG4gIGNvbnN0IGN1cnJlbnREYXRlID0gIERhdGVUaW1lLm5vdygpLnNldExvY2FsZSgnZXMtQ0wnKTtcbiAgY29uc3Qgc2VsZWN0ZWREYXRlID0gIERhdGVUaW1lLmZyb21JU08ocmVxLnF1ZXJ5LmN1cnJlbnREYXRlIGFzIHN0cmluZykuc2V0TG9jYWxlKCdlcy1DTCcpO1xuXG4gIGlmKHZhbGlkYXRlRGF0ZShjdXJyZW50RGF0ZSwgc2VsZWN0ZWREYXRlKSB8fCAhc2VsZWN0ZWREYXRlLmhhc1NhbWUoY3VycmVudERhdGUsICdkYXknKSkge1xuICAgIGNvbnN0IGFsbEhvdXJzID0gZ2V0QWxsSG91cnMoY3VycmVudERhdGUuaGFzU2FtZShzZWxlY3RlZERhdGUsICdkYXknKSA/IHNlbGVjdGVkRGF0ZS5ob3VyICsgMSA6IDkpO1xuXG4gICAgY29uc3QgYXZhaWxhYmxlSG91cnMgPSBhbGxIb3Vycy5tYXAoaG91ciA9PiB7XG4gICAgICByZXR1cm4gc2VsZWN0ZWREYXRlLnNldChob3VyKS50b0lTTygpXG4gICAgfSlcbiAgXG4gICAgYXZhaWxhYmxlSG91cnNCeVZldCA9IHZldHMubWFwKHZldCA9PiB7XG4gICAgICByZXR1cm4geyB2ZXQsIGF2YWlsYWJsZUhvdXJzIH07XG4gICAgfSk7XG4gIH1cblxuIFxuICBcbiAgcmVzLnN0YXR1cygyMDApLmpzb24oeyBhdmFpbGFibGVIb3Vyc0J5VmV0IH0gYXMgQXZhbGlhYmxlSG91clJlc3BvbnNlKVxufVxuIl0sIm5hbWVzIjpbIkRhdGVUaW1lIiwiTElNSVRTX1dPUktJTkdfSE9VUiIsIm1pbiIsIm1heCIsImdldEFsbEhvdXJzIiwiaG91ciIsImludGVydmFsIiwibWluSG91ciIsIkFycmF5IiwiZnJvbSIsImtleXMiLCJtYXAiLCJudW1iZXIiLCJtaW51dGVzIiwiTWF0aCIsImZsb29yIiwiaXNPbldvcmtpbmdIb3VyIiwiZGF0ZSIsInZhbGlkYXRlRGF0ZSIsImN1cnJlbnREYXRlIiwic2VsZWN0ZWREYXRlIiwiaGFzU2FtZSIsImhhbmRsZXIiLCJyZXEiLCJyZXMiLCJhdmFpbGFibGVIb3Vyc0J5VmV0IiwidmV0cyIsIm5hbWUiLCJub3ciLCJzZXRMb2NhbGUiLCJmcm9tSVNPIiwicXVlcnkiLCJhbGxIb3VycyIsImF2YWlsYWJsZUhvdXJzIiwic2V0IiwidG9JU08iLCJ2ZXQiLCJzdGF0dXMiLCJqc29uIl0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(api)/./src/pages/api/available-hours.ts\n");
+
+/***/ })
+
+};
+;
+
+// load runtime
+var __webpack_require__ = require("../../webpack-api-runtime.js");
+__webpack_require__.C(exports);
+var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
+var __webpack_exports__ = (__webpack_exec__("(api)/./src/pages/api/available-hours.ts"));
+module.exports = __webpack_exports__;
+
+})();
